@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogLineController : MonoBehaviour
 {
@@ -16,16 +17,18 @@ public class DialogLineController : MonoBehaviour
         switch (speaker)
         {
             case Speaker.CRIMINAL:
+                prefab.GetComponent<VerticalLayoutGroup>().padding.right = 250;
                 tmp.alignment = TextAlignmentOptions.MidlineLeft;
-                tmp.rectTransform.SetAnchor(AnchorPresets.MiddleRight);
-                tmp.rectTransform.SetPivot(PivotPresets.MiddleRight);
-                tmp.rectTransform.transform.position = Vector3.zero;
+                //tmp.rectTransform.SetAnchor(AnchorPresets.MiddleRight);
+                //tmp.rectTransform.SetPivot(PivotPresets.MiddleRight);
+                //tmp.rectTransform.transform.position = Vector3.zero;
                 break;
             case Speaker.NEGOTIATOR:
+                prefab.GetComponent<VerticalLayoutGroup>().padding.right = -250;
                 tmp.alignment = TextAlignmentOptions.MidlineRight;
-                tmp.rectTransform.SetAnchor(AnchorPresets.MiddleLeft);
-                tmp.rectTransform.SetPivot(PivotPresets.MiddleLeft);
-                tmp.rectTransform.transform.position = Vector3.zero;
+                //tmp.rectTransform.SetAnchor(AnchorPresets.MiddleLeft);
+                //tmp.rectTransform.SetPivot(PivotPresets.MiddleLeft);
+                //tmp.rectTransform.transform.position = Vector3.zero;
                 break;
         }
     }
