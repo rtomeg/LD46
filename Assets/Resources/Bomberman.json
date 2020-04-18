@@ -1,23 +1,27 @@
 {
-    "statement": "O me dais lo que pido o hago explotar la bomba ahora mismo. ¡Que no me tiembla la mano, eh!",
-    "negotiatorAnswers": [
+    "criminalStatements": [
         {
-            "dialogueOption": "Disculpa, que me están llamando por la otra línea, dame un minuto",
-            "wrathConsequence": 6,
-            "trustConsequence": -3,
-            "criminalResponse": "Qué otra linea ni otra linea, si sigues vacilándome te cuelgo"
-        },
-        {
-            "dialogueOption": "Vamos a calmarnos, pareces un tío razonable, podemos llegar a un acuerdo",
-            "wrathConsequence": -3,
-            "trustConsequence": 3,
-            "criminalResponse": "Vale, hablemos"
-        },
-        {
-            "dialogueOption": "¿Te han dicho alguna vez que tienes una voz muy bonita?",
-            "wrathConsequence": -2,
-            "trustConsequence": 3,
-            "criminalResponse": "La verdad es que siempre quise locutar vídeos de telemarketing, me siento muy identificado con sus problemas pero... ¡Oye! No me distraigas"
+            "statement": "O me dais lo que pido o hago explotar la bomba ahora mismo. ¡Que no me tiembla la mano, eh!",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Disculpa, que me están llamando por la otra línea, dame un minuto",
+                    "wrathConsequence": 6,
+                    "trustConsequence": -3,
+                    "criminalResponse": "Qué otra linea ni otra linea, si sigues vacilándome te cuelgo"
+                },
+                {
+                    "dialogueOption": "Vamos a calmarnos, pareces un tío razonable, podemos llegar a un acuerdo",
+                    "wrathConsequence": -3,
+                    "trustConsequence": 3,
+                    "criminalResponse": "Vale, hablemos"
+                },
+                {
+                    "dialogueOption": "¿Te han dicho alguna vez que tienes una voz muy bonita?",
+                    "wrathConsequence": -2,
+                    "trustConsequence": 3,
+                    "criminalResponse": "La verdad es que siempre quise locutar vídeos de telemarketing, me siento muy identificado con sus problemas pero... ¡Oye! No me distraigas"
+                }
+            ]
         }
     ]
 }

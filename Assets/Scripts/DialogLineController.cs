@@ -9,11 +9,11 @@ public class DialogLineController : MonoBehaviour
     [SerializeField]
     private GameObject dialogLinePrefab;
     public Speaker speaker;
-    public void CreateDialogue()//Speaker speaker, string text)
+    public TextMeshProUGUI CreateDialogue(Speaker speaker, string text)
     {
-        
         GameObject prefab = Instantiate(dialogLinePrefab, this.gameObject.transform);
         TextMeshProUGUI tmp = prefab.GetComponentInChildren<TextMeshProUGUI>();
+        tmp.SetText(text+"\n\n");
         switch (speaker)
         {
             case Speaker.CRIMINAL:
@@ -31,6 +31,7 @@ public class DialogLineController : MonoBehaviour
                 //tmp.rectTransform.transform.position = Vector3.zero;
                 break;
         }
+        return tmp;
     }
 
 }

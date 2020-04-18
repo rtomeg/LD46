@@ -1,13 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class CriminalConversation
 {
-    public string statement;
-    public NegotiatorAnswers[] negotiatorAnswers;
+    public List<CriminalStatement> criminalStatements;
+
 }
+
 [Serializable]
-public class NegotiatorAnswers
+public class CriminalStatement
+{
+    public string statement;
+    public NegotiatorAnswer[] negotiatorAnswers;
+}
+
+[Serializable]
+public class NegotiatorAnswer
 {
     public string dialogueOption;
     public int wrathConsequence;
