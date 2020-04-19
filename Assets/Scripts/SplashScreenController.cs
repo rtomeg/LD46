@@ -15,12 +15,19 @@ public class SplashScreenController : MonoBehaviour
     [SerializeField]
     private GameObject playButtom;
 
+    [SerializeField]
+    private GameController gameController;
+
 
     IEnumerator Start()
     {
         if (audioController == null)
         {
             audioController = FindObjectOfType<AudioController>();
+        }
+
+        if(gameController == null){
+            gameController = FindObjectOfType<GameController>();
         }
         m_canvas = GetComponent<Canvas>();
 
@@ -68,6 +75,6 @@ public class SplashScreenController : MonoBehaviour
     }
 
     public void OnPlayButtonClick(){
-        GetComponent<CanvasGroup>().DOFade(0, 1).OnComplete(()=>m_canvas.enabled = false);
+        GetComponent<CanvasGroup>().DOFade(0, 1).OnComplete(()=> {m_canvas.enabled = false; gameController.StartGame();});
     }
 }

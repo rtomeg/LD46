@@ -1,4 +1,5 @@
 ﻿public enum Speaker{
     CRIMINAL,
-    NEGOTIATOR
+    NEGOTIATOR,
+    NARRATOR
 }

@@ -11,15 +11,20 @@ public class StatsController : MonoBehaviour
     Slider m_slider;
     [SerializeField]
     Image fill;
-    void Start(){
+    void Start()
+    {
         m_slider = GetComponent<Slider>();
     }
 
-    public void UpdateValue(int value){
+    public void UpdateValue(int value)
+    {
         m_slider.DOValue(value, 0.5f);
-        if(value >7){
+        if (value > 15 || value < 5)
+        {
             fill.DOColor(dangerColor, 0.5f);
-        }else{
+        }
+        else
+        {
             fill.DOColor(mainColor, 0.5f);
         }
     }

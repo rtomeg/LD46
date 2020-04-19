@@ -1,107 +1,235 @@
 {
+    "introduction": "Hola Alex. \nEstás aquí porque tenemos un problema. \nNos ha llamado un supuesto terrorista que dice llevar una bomba encima y amenaza con explotarla en un lugar de esta ciudad. Tu misión es sencilla: <b> Tienes que mantener la llamada activa el tiempo suficiente para que nuestro equipo de informáticos rastree la llamada </b>. Confiamos en tí, eres nuestra última esperanza",
+    "firstDialog": "Hola, soy Alex. Estoy aquí para ayudarte",
+    "hackingSteps": [
+        "Programando interfaz en Visual Basic para localizar la IP",
+        "Renderizando mapa de geolocalización",
+        "Triangulando posición en Google Maps",
+        "Arreglando bugs del código del becario",
+        "Preparando café"
+    ],
+    "successEnding": "Muy bien Alex. Hemos conseguido detener al terrorista sin que haya ningún herido. Se encontraba en una zona muy poco poblada y la bomba no tenía mucho alcance, así que tampoco hubiera pasado nada. Igualmente, has hecho un buen trabajo",
+    "failEnding": "Joder, Alex, ¿Te crees que esto es un juego? Ahora que ha colgado no sabremos dónde se esconde. Va a morir mucha gente y será todo por tu culpa. Vuelve cuando vayas a tomarte todo esto en serio",
     "criminalStatements": [
         {
-            "minWrath": 0,
+            "maxTrust": 20,
             "minTrust": 0,
             "statement": "O me dais lo que pido o hago explotar la bomba ahora mismo. ¡Que estoy muy loco, eh!",
             "negotiatorAnswers": [
                 {
-                    
                     "dialogueOption": "Disculpa, que me están llamando por la otra línea, dame un minuto",
-                    "wrathConsequence": 6,
                     "trustConsequence": -3,
                     "criminalResponse": "Qué otra linea ni otra linea, si sigues vacilándome te cuelgo"
                 },
                 {
                     "dialogueOption": "Vamos a calmarnos, pareces un tío razonable, podemos llegar a un acuerdo",
-                    "wrathConsequence": -3,
                     "trustConsequence": 3,
                     "criminalResponse": "Vale, hablemos"
                 },
                 {
                     "dialogueOption": "¿Te han dicho alguna vez que tienes una voz muy bonita?",
-                    "wrathConsequence": -2,
                     "trustConsequence": 3,
                     "criminalResponse": "La verdad es que siempre quise locutar vídeos de teletienda, me siento muy identificado con sus problemas pero... ¡Oye! No me distraigas"
                 }
             ]
         },
         {
-            "minWrath": 0,
+            "maxTrust": 20,
             "minTrust": 0,
             "statement": "Jamás sabréis dónde estoy, así que ya me podéis ir dando lo que te pido",
             "negotiatorAnswers": [
                 {
                     "dialogueOption": "En realidad estamos localizando tu llamada. Si esperas 2 minutos más sabremos dónde estás",
-                    "wrathConsequence": 10,
-                    "trustConsequence": -10,
+                    "trustConsequence": -20,
                     "criminalResponse": "¡¿CÓMO?!"
                 },
                 {
-                    "dialogueOption": "Seguro que es un sitio precioso, con tu petición se nota que tienes buen gusto",
-                    "wrathConsequence": -2,
-                    "trustConsequence": 1,
+                    "dialogueOption": "Seguro que es un sitio precioso, nos acabamos de conocer pero se nota que tienes buen gusto",
+                    "trustConsequence": 2,
                     "criminalResponse": "Agradezco que te des cuenta, pero volvamos al tema..."
                 },
                 {
                     "dialogueOption": "Pero dame alguna pista, venga. ¿Estás al norte o al sur?",
-                    "wrathConsequence": 2,
-                    "trustConsequence": -2,
+                    "trustConsequence": -3,
                     "criminalResponse": "¿Estás jugando conmigo? ¿Qué me han traído, al becario?"
                 }
             ]
         },
         {
-            "minWrath": 7,
+            "maxTrust": 5,
             "minTrust": 0,
             "statement": "Mira, me estás cabreando con tus tonterías. O nos ponemos serios ya o te cuelgo inmediatamente",
             "negotiatorAnswers": [
                 {
                     "dialogueOption": "La verdad es que me da exactamente igual, cuelga si quieres",
-                    "wrathConsequence": 3,
-                    "trustConsequence": -3,
+                    "trustConsequence": -5,
                     "criminalResponse": "..."
                 },
                 {
                     "dialogueOption": "No, hombre, ahora que nos estábamos haciendo colegas, cuentame un poco más de ti",
-                    "wrathConsequence": -1,
                     "trustConsequence": 1,
                     "criminalResponse": "¿De mí...? Pues la verdad no hay mucho que contar. Soy típico acuario, ya sabes... ¡Oye, no me distraigas!"
                 },
                 {
                     "dialogueOption": "Vale, pongámonos serios. Voy a ver qué puedo hacer",
-                    "wrathConsequence": -1,
                     "trustConsequence": 3,
                     "criminalResponse": "Joder, vale... pero venga ya"
                 }
             ]
         },
         {
-            "minWrath": 0,
-            "minTrust": 7,
+            "maxTrust": 20,
+            "minTrust": 16,
             "statement": "Te agradezco que me digas tantas cosas bonitas, de verdad, pero estoy empezando a estar cansado. Si no me das ya lo que pido te voy a colgar",
             "negotiatorAnswers": [
                 {
                     "dialogueOption": "Parece que solo hablas conmigo para lo que te interesa. Así no funciona una relación",
-                    "wrathConsequence": 2,
                     "trustConsequence": -3,
                     "criminalResponse": "¡Pues claro, para eso estamos hablando! ¿Es la primera vez que haces tú trabajo o qué?"
                 },
                 {
                     "dialogueOption": "Es que no puedo evitarlo, me encanta charlar contigo",
-                    "wrathConsequence": -3,
-                    "trustConsequence": 3,
+                    "trustConsequence": 5,
                     "criminalResponse": "Y a mí contigo, pero siento que no me estás tomando en serio... así que creo que es mejor que dejemos de hablar"
                 },
                 {
                     "dialogueOption": "Es que creo que empiezo a sentir algo muy intenso por tí...",
-                    "wrathConsequence": -10,
                     "trustConsequence": 10,
                     "criminalResponse": "Entiendo lo que dices... a mí también me pasa. Pero esto no podría funcionar, así que creo que es mejor que dejemos de hablar"
                 }
             ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 7,
+            "statement": "...",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Oye, me han dado este teléfono y no entiendo nada ¿Qué es lo que buscas con todo esto?",
+                    "trustConsequence": 5,
+                    "criminalResponse": "Pues lo que llevo rato explicando, entre muchas otras cosas un contrato fijo y un sueldo alto, como mínimo 1000€"
+                },
+                {
+                    "dialogueOption": "¿Te han dicho alguna vez que eres un poco plasta?",
+                    "trustConsequence": -5,
+                    "criminalResponse": "Una plasta es lo que va a quedar cuando detone la bomba"
+                },
+                {
+                    "dialogueOption": "¿Qué tal el tiempo por allí? Aquí llueve..",
+                    "trustConsequence": 2,
+                    "criminalResponse": "Aquí hace sol pero no he podido aprovechar el día por el tema del terrorismo"
+                }
+            ]
+        },
+        {
+            "maxTrust": 6,
+            "minTrust": 0,
+            "statement": "Estoy a una sobrada más de colgarte...",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Lo siento, es que se me da muy mal esto de conocer a personas nuevas. ¿Podemos empezar de nuevo? Mi nombre es Alex",
+                    "trustConsequence": 4,
+                    "criminalResponse": "¿Qué? Bueno... no te creas que a mí se me da muy bien también. Vale, empecemos de nuevo. Me llamo Chris y haré explotar esta bomba si no incluyen batamanta en la RAE"
+                },
+                {
+                    "dialogueOption": "No, por favor, te daré lo que quieras... ¿Qué querías exactamente?",
+                    "trustConsequence": 2,
+                    "criminalResponse": "¿Cómo que qué quiero? Os lo he dicho mil veces: quiero que se legalize la marihuana YA. ¡Ah! y lo de los perritos, claro"
+                },
+                {
+                    "dialogueOption": "Pues cuelgame, así dejamos de perder el tiempo. Total, a mí me van a pagar igual...",
+                    "trustConsequence": -4,
+                    "criminalResponse": "No sé ni para qué me esfuerzo..."
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 0,
+            "statement": "...",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Por lo que más quieras, ¿puedes ser más exacto con tus demandas?",
+                    "trustConsequence": -4,
+                    "criminalResponse": "¿Cómo quieres que te lo explique? ¿Te hago un esquema?"
+                },
+                {
+                    "dialogueOption": "Por cierto ¿qué te ha parecido la última temporada de Bojack Horseman?",
+                    "trustConsequence": 2,
+                    "criminalResponse": "Pues la verdad es que me ha gustado más el penúltimo capítulo que el último"
+                },
+                {
+                    "dialogueOption": "Estoy empezando a pensar que te estás quedando conmigo",
+                    "trustConsequence": 2,
+                    "criminalResponse": "Razón no te falta, pero soy yo el que tiene la bomba"
+                }
+            ]
+        },
+        {
+            "maxTrust": 15,
+            "minTrust": 6,
+            "statement": "¿Pero esto qué es? ¿Una versión cutre de Papers Please?",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Hombre no seas tan exigente, ¿acaso no sabes que lo ha hecho una persona en 2 días?",
+                    "trustConsequence": 4,
+                    "criminalResponse": "Ah bueno, entonces no está tan mal"
+                },
+                {
+                    "dialogueOption": "Me parece que tus líneas de diálogo no son tan buenas...",
+                    "trustConsequence": -6,
+                    "criminalResponse": "Espero que mi diálogo final sea la bomba"
+                },
+                {
+                    "dialogueOption": "Ojalá fuese un Dating Sim (suspiro)",
+                    "trustConsequence": -4,
+                    "criminalResponse": "Yo preferiría un shooter"
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 0,
+            "statement": "Si no cumplís todas mis demandas en la próxima hora me llevaré a medio país por delante",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "¿Y si nos mandas un whatsapp con una lista detallada para que lo tengamos más claro?",
+                    "trustConsequence": 4,
+                    "criminalResponse": "Vale, te la mando a este número"
+                },
+                {
+                    "dialogueOption": "De hecho ya están en camino",
+                    "trustConsequence": -6,
+                    "criminalResponse": "¿Como van a estar de camino si aún no os he dicho EXACTAMENTE lo que quiero?"
+                },
+                {
+                    "dialogueOption": "Yo sólo quiero que tú estés bien y seas feliz",
+                    "trustConsequence": 8,
+                    "criminalResponse": "Esto se está poniendo muy intenso y no puedo permitirme ponerme emocional"
+                }
+            ]
+        },
+        {
+            "maxTrust": 15,
+            "minTrust": 6,
+            "statement": "Sois unos incompetentes, cualquier otro terrorista lo habría volado ya todos por los aires",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Por piedad, ¿me puedes decir qué es lo que buscas?",
+                    "trustConsequence": 4,
+                    "criminalResponse": "Creía que estaba claro: que la Ludum Dare dure un día más y no tenga que acabar el juego con prisas"
+                },
+                {
+                    "dialogueOption": "¿Y a qué esperas?",
+                    "trustConsequence": -6,
+                    "criminalResponse": "¿Ahora tienes prisa?"
+                },
+                {
+                    "dialogueOption": "Creo que no entiendo muy bien el juego ¿lo estoy haciendo bien?",
+                    "trustConsequence": 5,
+                    "criminalResponse": "Yo tampoco lo tengo muy claro..."
+                }
+            ]
         }
     ]
-    
-
 }

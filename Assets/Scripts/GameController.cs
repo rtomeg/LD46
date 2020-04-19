@@ -3,17 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameController : MonoBehaviour
 {
     public int trust;
-    public int wrath;
     [SerializeField]
     StatsController trustSlider;
-    [SerializeField]
-    StatsController wrathSlider;
-
     [SerializeField]
     AudioController audioController;
 
@@ -32,14 +29,22 @@ public class GameController : MonoBehaviour
     private GamePhase currentGamePhase;
     [SerializeField]
     private PlayerChoicesController playerChoicesController;
-
+    private CriminalConversation bombermanConversation;
     private bool gameOver;
+    private bool introductionDone = false;
     [SerializeField]
     private NokiaController nokiaController;
+    [SerializeField]
+    private CanvasGroup m_canvasGroup;
+
+    private bool restartGame;
+
+    private int numberOfAnswers = 0;
 
     void Start()
     {
-        if (splashScreenController == null){
+        if (splashScreenController == null)
+        {
             splashScreenController = FindObjectOfType<SplashScreenController>();
         }
         if (nokiaController == null)
@@ -52,17 +57,19 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void StartGame(){
+    public void StartGame()
+    {
         TextAsset bomberman = Resources.Load<TextAsset>("Bomberman");
-        CriminalConversation bombermanConversation = JsonUtility.FromJson<CriminalConversation>(bomberman.text);
+        bombermanConversation = JsonUtility.FromJson<CriminalConversation>(bomberman.text);
         criminalStatements = bombermanConversation.criminalStatements;
-
-        StatementPhase();
+        m_canvasGroup.DOFade(1, 0.5f).OnComplete(() => CreateChatDialog(Speaker.NARRATOR, bombermanConversation.introduction));
     }
+
+
     private CriminalStatement GetValidStatement()
     {
 
-        CriminalStatement answer = criminalStatements.Find(x => x.minTrust <= trust && x.minWrath <= wrath);
+        CriminalStatement answer = criminalStatements.Find(x => x.minTrust <= trust && x.maxTrust >= trust);
         if (answer != null)
         {
             criminalStatements.Remove(answer);
@@ -77,7 +84,8 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Input.anyKeyDown)
-        { if(dialogIsPlaying)  StopDialogAnimation();
+        {
+            if (dialogIsPlaying) StopDialogAnimation();
         }
     }
 
@@ -88,6 +96,10 @@ public class GameController : MonoBehaviour
         if (dialogIsPlaying)
         {
             DialogFinished();
+        }
+        if (restartGame)
+        {
+            RestartGame();
         }
     }
 
@@ -105,8 +117,15 @@ public class GameController : MonoBehaviour
             currentDialog.maxVisibleCharacters = visibleCount;
             if (visibleCount >= totalVisibleCharacters)
             {
+
                 if (gameOver)
                 {
+                    yield break;
+                }
+
+                if (restartGame)
+                {
+                    RestartGame();
                     yield break;
                 }
 
@@ -118,20 +137,24 @@ public class GameController : MonoBehaviour
             if (gameOver)
             {
                 audioController.PlayEndCallSound();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
             }
             else
             {
                 if (counter % 2 == 0)
                 {
-                nokiaController.Shake();
-                audioController.PlayBeepKey();
-                                }
+                    nokiaController.Shake();
+                    audioController.PlayBeepKey();
+                }
                 yield return new WaitForSeconds(dialogueSpeed);
             }
         }
     }
 
+    private void RestartGame()
+    {
+        m_canvasGroup.DOFade(0, 1f).OnComplete(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+    }
 
     private void DialogStarted()
     {
@@ -142,63 +165,83 @@ public class GameController : MonoBehaviour
     {
         dialogIsPlaying = false;
         StartCoroutine(NextStep());
-
     }
 
     private IEnumerator NextStep()
     {
-
-        if ((int)currentGamePhase == Enum.GetValues(typeof(GamePhase)).Length - 1)
+        if (!introductionDone)
         {
-            currentGamePhase = 0;
+            CreateChatDialog(Speaker.NEGOTIATOR, bombermanConversation.firstDialog);
+            introductionDone = true;
+            currentGamePhase = GamePhase.CRIMINAL_ANSWER;
         }
         else
         {
-            currentGamePhase++;
-        }
-        yield return new WaitForSeconds(1);
-        switch (currentGamePhase)
-        {
-            case GamePhase.STATEMENT:
-                StatementPhase();
-                break;
-            case GamePhase.PLAYER_CHOICE:
-                PlayerChoicePhase();
-                break;
-            case GamePhase.CRIMINAL_ANSWER:
-                CriminalAnswerPhase();
-                break;
+
+            if ((int)currentGamePhase == Enum.GetValues(typeof(GamePhase)).Length - 1)
+            {
+                currentGamePhase = 0;
+            }
+            else
+            {
+                currentGamePhase++;
+            }
+            yield return new WaitForSeconds(1);
+            switch (currentGamePhase)
+            {
+                case GamePhase.STATEMENT:
+                    StatementPhase();
+                    break;
+                case GamePhase.PLAYER_CHOICE:
+                    PlayerChoicePhase();
+                    break;
+                case GamePhase.CRIMINAL_ANSWER:
+                    CriminalAnswerPhase();
+                    break;
+            }
         }
     }
     private void StatementPhase()
     {
-        if (trust >= 10 || wrath >= 10)
+        if (trust >= 20 || trust <= 0)
         {
-            currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, ". . .");
-            typeWriterCoroutine = AnimateText();
-            StartCoroutine(typeWriterCoroutine);
+            CreateChatDialog(Speaker.CRIMINAL, ". . .");
             gameOver = true;
-            StartGameOver();
+            StartCoroutine(StartGameOver());
         }
         else
         {
             currentStatement = GetValidStatement();
-            currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, currentStatement.statement);
-            typeWriterCoroutine = AnimateText();
-            StartCoroutine(typeWriterCoroutine);
+            CreateChatDialog(Speaker.CRIMINAL, currentStatement.statement);
         }
     }
 
-    private void StartGameOver()
+    private IEnumerator StartGameOver()
     {
-        Debug.Log("GAME OVER");
+        yield return new WaitForSeconds(5);
+        gameOver = false;
+
+        if (trust >= 20 || trust <= 0)
+        {
+            restartGame = true;
+            gameOver = false;
+            CreateChatDialog(Speaker.NARRATOR, bombermanConversation.failEnding);
+        }
+        else
+        {
+            gameOver = false;
+            restartGame = true;
+            CreateChatDialog(Speaker.NARRATOR, bombermanConversation.successEnding);
+        }
     }
 
     private void CriminalAnswerPhase()
     {
-        currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, currentNegotatorAnswer.criminalResponse);
-        typeWriterCoroutine = AnimateText();
-        StartCoroutine(typeWriterCoroutine);
+        if (!restartGame && !gameOver)
+        {
+            CreateChatDialog(Speaker.CRIMINAL, currentNegotatorAnswer.criminalResponse);
+
+        }
     }
 
     private void PlayerChoicePhase()
@@ -215,25 +258,23 @@ public class GameController : MonoBehaviour
     public void OnPlayerChoice(int option)
     {
         currentNegotatorAnswer = currentStatement.negotiatorAnswers[option];
-
-        currentDialog = dialogLineController.CreateDialogue(Speaker.NEGOTIATOR, currentNegotatorAnswer.dialogueOption);
         UpdateStats();
-        typeWriterCoroutine = AnimateText();
         playerChoicesController.HideOptions();
-        StartCoroutine(typeWriterCoroutine);
-
+        CreateChatDialog(Speaker.NEGOTIATOR, currentNegotatorAnswer.dialogueOption);
     }
 
     private void UpdateStats()
     {
         trust = trust + currentNegotatorAnswer.trustConsequence;
-        wrath = wrath + currentNegotatorAnswer.wrathConsequence;
-
         trustSlider.UpdateValue(trust);
-        wrathSlider.UpdateValue(wrath);
     }
 
-
+    private void CreateChatDialog(Speaker speaker, string text)
+    {
+        currentDialog = dialogLineController.CreateDialogue(speaker, text);
+        typeWriterCoroutine = AnimateText();
+        StartCoroutine(typeWriterCoroutine);
+    }
 
     public enum GamePhase
     {

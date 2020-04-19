@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DialogLineController : MonoBehaviour
 {
+    public Color32 narratorColor;
     [SerializeField]
     private GameObject dialogLinePrefab;
     public Speaker speaker;
@@ -30,6 +31,12 @@ public class DialogLineController : MonoBehaviour
                 //tmp.rectTransform.SetPivot(PivotPresets.MiddleLeft);
                 //tmp.rectTransform.transform.position = Vector3.zero;
                 break;
+            case Speaker.NARRATOR:
+                prefab.GetComponent<VerticalLayoutGroup>().padding.right = -250;
+                tmp.alignment = TextAlignmentOptions.MidlineRight;
+                tmp.color = narratorColor;
+                break;
+
         }
         return tmp;
     }
