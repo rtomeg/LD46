@@ -8,7 +8,7 @@
         "Arreglando bugs del código del becario",
         "Preparando café"
     ],
-    "successEnding": "Muy bien Alex. Hemos conseguido detener al terrorista sin que haya ningún herido. Se encontraba en una zona muy poco poblada y la bomba no tenía mucho alcance, así que tampoco hubiera pasado nada. Igualmente, has hecho un buen trabajo",
+    "successEnding": "Bien hecho, Alex. Hemos conseguido detener al terrorista sin que haya ningún herido. Se encontraba en una zona muy poco poblada y la bomba no tenía mucho alcance, así que tampoco hubiera pasado nada. Igualmente, has hecho un buen trabajo",
     "failEnding": "Joder, Alex, ¿Te crees que esto es un juego? Ahora que ha colgado no sabremos dónde se esconde. Va a morir mucha gente y será todo por tu culpa. Vuelve cuando vayas a tomarte todo esto en serio",
     "criminalStatements": [
         {
@@ -29,7 +29,7 @@
                 {
                     "dialogueOption": "¿Te han dicho alguna vez que tienes una voz muy bonita?",
                     "trustConsequence": 3,
-                    "criminalResponse": "La verdad es que siempre quise locutar vídeos de teletienda, me siento muy identificado con sus problemas pero... ¡Oye! No me distraigas"
+                    "criminalResponse": "La verdad es que siempre quise ser actor de doblaje, creo que podría ser una buena voz para Justin Timberlake... ¡Oye! No me distraigas"
                 }
             ]
         },
@@ -105,7 +105,7 @@
             "statement": "...",
             "negotiatorAnswers": [
                 {
-                    "dialogueOption": "Oye, me han dado este teléfono y no entiendo nada ¿Qué es lo que buscas con todo esto?",
+                    "dialogueOption": "Oye, no estoy entendiendo nada. \n ¿Qué es lo que buscas con todo esto?",
                     "trustConsequence": 5,
                     "criminalResponse": "Pues lo que llevo rato explicando, entre muchas otras cosas un contrato fijo y un sueldo alto, como mínimo 1000€"
                 },
@@ -200,7 +200,7 @@
                 {
                     "dialogueOption": "De hecho ya están en camino",
                     "trustConsequence": -6,
-                    "criminalResponse": "¿Como van a estar de camino si aún no os he dicho EXACTAMENTE lo que quiero?"
+                    "criminalResponse": "¿Cómo van a estar de camino si aún no os he dicho EXACTAMENTE lo que quiero?"
                 },
                 {
                     "dialogueOption": "Yo sólo quiero que tú estés bien y seas feliz",
@@ -217,7 +217,7 @@
                 {
                     "dialogueOption": "Por piedad, ¿me puedes decir qué es lo que buscas?",
                     "trustConsequence": 4,
-                    "criminalResponse": "Creía que estaba claro: que la Ludum Dare dure un día más y no tenga que acabar el juego con prisas"
+                    "criminalResponse": "Creía que lo había dejado bien claro. Haré volar todo por los aires si no sacan un Half Life 3 DE VERDAD"
                 },
                 {
                     "dialogueOption": "¿Y a qué esperas?",
@@ -228,6 +228,28 @@
                     "dialogueOption": "Creo que no entiendo muy bien el juego ¿lo estoy haciendo bien?",
                     "trustConsequence": 5,
                     "criminalResponse": "Yo tampoco lo tengo muy claro..."
+                }
+            ]
+        }, 
+        {
+            "maxTrust": 20,
+            "minTrust": 6,
+            "statement": "¡Negocias como un granjero!",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Yo soy cola, tú pegamento",
+                    "trustConsequence": 5,
+                    "criminalResponse": "¿Es eso todo lo que sabes?"
+                },
+                {
+                    "dialogueOption": "Que apropiado, tú amenazas como una vaca",
+                    "trustConsequence": 2,
+                    "criminalResponse": "Arg!"
+                },
+                {
+                    "dialogueOption": "Ah, sí?",
+                    "trustConsequence": -5,
+                    "criminalResponse": "¿Es eso todo lo que sabes?"
                 }
             ]
         }

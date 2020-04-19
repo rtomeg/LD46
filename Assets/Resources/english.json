@@ -1,0 +1,257 @@
+{
+    "introduction": "Hi Alex. \nYou are here because we have a problem. \nWe have received a call of a supposed terrorist who claims to have a bomb attached and threatens to explode it somewhere in the city. Your mission is simple: <b> You have to keep the connection alive long enough for our IT team to trace the call </b>. We trust you, you are our last hope",
+    "firstDialog": "Hi, my name is Alex, I'm here to help you",
+    "hackingSteps": [
+        "Programando interfaz en Visual Basic para localizar la IP",
+        "Renderizando mapa de geolocalización",
+        "Triangulando posición en Google Maps",
+        "Arreglando bugs del código del becario",
+        "Preparando café"
+    ],
+    "successEnding": "Well done, Alex. You managed to arrest the terrorist without any injures. He wasn't in adensely populated area and the bomb didn't have much range, so nothing would have happened either. In any case, you did a good job",
+    "failEnding": "Damn, Alex, do you think this is a game? Now that he hung up, we won't know where he was hiding. A lot of people are going to die and it's all your fault. Come back when you take this seriously",
+    "criminalStatements": [
+        {
+            "maxTrust": 20,
+            "minTrust": 0,
+            "statement": "Give me what I want or I will blow everything up. I'm nuts!",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Excuse me, they are calling me on the other line, give me a minute",
+                    "trustConsequence": -3,
+                    "criminalResponse": "What the fuck are you talking about? Stop this shit or I will end the call"
+                },
+                {
+                    "dialogueOption": "Let's calm down, you seem like a reasonable guy, we can reach an agreement",
+                    "trustConsequence": 3,
+                    "criminalResponse": "Ok, let's talk"
+                },
+                {
+                    "dialogueOption": "Have anyone ever told you that you have a very beautiful voice?",
+                    "trustConsequence": 3,
+                    "criminalResponse": "The truth is that I always wanted to work as a dubbing actor but... Hey! Don't distract me"
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 0,
+            "statement": "You will never know where I am, so give me what I want",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "We are actually tracking your location. If you give us two more minutes we will know exactly where you are right now",
+                    "trustConsequence": -20,
+                    "criminalResponse": "WHAT?!"
+                },
+                {
+                    "dialogueOption": "I'm sure that you are in a very beautiful place. Even though we have just met, your tastes seems pretty exquisite",
+                    "trustConsequence": 2,
+                    "criminalResponse": "I appreciate you noticing it, but let's return to the topic"
+                },
+                {
+                    "dialogueOption": "But please, give me a hint. Are you in the north or the south of the city",
+                    "trustConsequence": -3,
+                    "criminalResponse": "Are you playing games with me? Are you the intern?"
+                }
+            ]
+        },
+        {
+            "maxTrust": 5,
+            "minTrust": 0,
+            "statement": "You're pissing me off with all this nonsense. Either we get serious or I will end the call right now",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "The truth is that i don't give a fuck. Whatever you want",
+                    "trustConsequence": -5,
+                    "criminalResponse": "..."
+                },
+                {
+                    "dialogueOption": "Please, don't end the call now that we are getting along. We could become great buddies. Tell me a little about yourself",
+                    "trustConsequence": 1,
+                    "criminalResponse": "About myself? Well, there isn't much to tell. Typical aquario, you know... \nHey, don't distract me!"
+                },
+                {
+                    "dialogueOption": "Ok, let's get serious. Lets see what we can do",
+                    "trustConsequence": 3,
+                    "criminalResponse": "Damn it, ok... but hurry up"
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 16,
+            "statement": "I really appreciate all the compliments, but I'm starting to get tired of this shit. If you don't give me what I want, I'm going to hang up.",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "It seems that you only talk to me when you want something and that's not how relationships work",
+                    "trustConsequence": -3,
+                    "criminalResponse": "But that's the whole point of this conversation. Is this your first time in this kind of situations?"
+                },
+                {
+                    "dialogueOption": "I can't help it, I just love chatting with you",
+                    "trustConsequence": 5,
+                    "criminalResponse": "So do I, but I feel like you're not taking me seriously... so we better stop talking"
+                },
+                {
+                    "dialogueOption": "I think I started to have deep feelings for you...",
+                    "trustConsequence": 10,
+                    "criminalResponse": "I understand it.. it was happening to me too. But you know this isn't going to work, so we better stop talking"
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 7,
+            "statement": "...",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Hey, I don't understand a shit \n What the hell are you looking for.",
+                    "trustConsequence": 5,
+                    "criminalResponse": "Well, I have already explained it before. Among many other things, a permanent position with a high salary"
+                },
+                {
+                    "dialogueOption": "Have anyone ever told you that you are kind of a dick?",
+                    "trustConsequence": -5,
+                    "criminalResponse": "There wont be any dicksNo dick will remain after I blow everything up, man"
+                },
+                {
+                    "dialogueOption": "How is the weather over there? It's raining here...",
+                    "trustConsequence": 2,
+                    "criminalResponse": "It's sunny here but i couldn't enjoy the day because all the terrorist stuff, you know..."
+                }
+            ]
+        },
+        {
+            "maxTrust": 6,
+            "minTrust": 0,
+            "statement": "Keep saying bullshit and I end the call",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "I'm sorry, I'm not that good at meeting new people. Can we start again, please? My name is Alex",
+                    "trustConsequence": 4,
+                    "criminalResponse": "I'm not good either. Ok, let's start again. My name is Chris and I will blow everything up if they don't release a REAL Half Life 3"
+                },
+                {
+                    "dialogueOption": "No, please, I will give you whatever you want, but for God's sake, tell me exactly what you want",
+                    "trustConsequence": 2,
+                    "criminalResponse": "What do I want? I have told you a thousand times: I want marijuana to be legalized right NOW. Oh, and the doggie thing, of course"
+                },
+                {
+                    "dialogueOption": "Ok, end the call. Stop wasting my time. They are going to pay me anyway...",
+                    "trustConsequence": -4,
+                    "criminalResponse": "I don't even know why I am trying to fix this situation..."
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 0,
+            "statement": "...",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "For God's sake, can you be more specific with your rdemands?",
+                    "trustConsequence": -4,
+                    "criminalResponse": "More specific? Do you need a Power Point?"
+                },
+                {
+                    "dialogueOption": "By the way, what do you think about the last season of Bojack Horseman?",
+                    "trustConsequence": 2,
+                    "criminalResponse": "Well, the truth is that I really enjoyed it. I even cried with the final scene"
+                },
+                {
+                    "dialogueOption": "Are you kidding me?",
+                    "trustConsequence": 2,
+                    "criminalResponse": "You got me there, but I'm the one with the bomb"
+                }
+            ]
+        },
+        {
+            "maxTrust": 15,
+            "minTrust": 6,
+            "statement": "What even is this? A shabby version of Papers Please?",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "C'mon don't be so demanding, don't you know this was made by one person in 2 days?",
+                    "trustConsequence": 4,
+                    "criminalResponse": "Ah well, it's not that bad then"
+                },
+                {
+                    "dialogueOption": "I think your dialog lines are so good...",
+                    "trustConsequence": -6,
+                    "criminalResponse": "I hope my final dialog is the bomb"
+                },
+                {
+                    "dialogueOption": "I wish it was a Dating Sim *sigh*",
+                    "trustConsequence": -4,
+                    "criminalResponse": "I would prefer a shooter"
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 0,
+            "statement": "If you don't fulfill my demands I will blow half of the country on the next hour",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "What about sending a whatsapp with a detailed list so that we don't get it wrong?",
+                    "trustConsequence": 4,
+                    "criminalResponse": "Okay, I will send it to this number"
+                },
+                {
+                    "dialogueOption": "In fact, they are on their way",
+                    "trustConsequence": -6,
+                    "criminalResponse": "How are they on their way if I haven't told you EXACTLY what I want?"
+                },
+                {
+                    "dialogueOption": "I only want you to be good an happy",
+                    "trustConsequence": 8,
+                    "criminalResponse": "This is getting really intense, I can't afford getting emotional"
+                }
+            ]
+        },
+        {
+            "maxTrust": 15,
+            "minTrust": 6,
+            "statement": "You are a bunch of incompetents, any other terrorist would have blown everything up already",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "For God's sake, could you tell me what are you looking for?",
+                    "trustConsequence": 4,
+                    "criminalResponse": "I thought it was clear: I want the Ludum Dare to last one more day so I don't have to finish the game in a hurry"
+                },
+                {
+                    "dialogueOption": "What are you waiting for?",
+                    "trustConsequence": -6,
+                    "criminalResponse": "Are you in a hurry now?"
+                },
+                {
+                    "dialogueOption": "I think I don't quite understand the game, am I doing it alright?",
+                    "trustConsequence": 5,
+                    "criminalResponse": "I am not really sure either..."
+                }
+            ]
+        },
+        {
+            "maxTrust": 20,
+            "minTrust": 6,
+            "statement": "You’re no match for my brains, you poor fool",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "I am rubber, you are glue",
+                    "trustConsequence": 5,
+                    "criminalResponse": "Is this all you can do?"
+                },
+                {
+                    "dialogueOption": "I’d be in real trouble if you ever used them",
+                    "trustConsequence": 2,
+                    "criminalResponse": "Arg!"
+                },
+                {
+                    "dialogueOption": "I'm shaking, I'm shaking!",
+                    "trustConsequence": -5,
+                    "criminalResponse": "Is this all you can do?"
+                }
+            ]
+        }
+    ]
+}

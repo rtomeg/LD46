@@ -8,6 +8,7 @@ using DG.Tweening;
 
 public class GameController : MonoBehaviour
 {
+
     public int trust;
     [SerializeField]
     StatsController trustSlider;
@@ -16,6 +17,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     SplashScreenController splashScreenController;
+
+    [SerializeField]
+    HackingController hackingController;
 
     public static float dialogueSpeed = 0.05f;
     private IEnumerator typeWriterCoroutine;
@@ -36,6 +40,8 @@ public class GameController : MonoBehaviour
     private NokiaController nokiaController;
     [SerializeField]
     private CanvasGroup m_canvasGroup;
+
+    public string path = "english";
 
     private bool restartGame;
 
@@ -59,9 +65,11 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        TextAsset bomberman = Resources.Load<TextAsset>("Bomberman");
+        TextAsset bomberman = Resources.Load<TextAsset>(path);
         bombermanConversation = JsonUtility.FromJson<CriminalConversation>(bomberman.text);
         criminalStatements = bombermanConversation.criminalStatements;
+        criminalStatements.Shuffle();
+        nokiaController.MoveRight();
         m_canvasGroup.DOFade(1, 0.5f).OnComplete(() => CreateChatDialog(Speaker.NARRATOR, bombermanConversation.introduction));
     }
 
@@ -86,6 +94,7 @@ public class GameController : MonoBehaviour
         if (Input.anyKeyDown)
         {
             if (dialogIsPlaying) StopDialogAnimation();
+            if(!gameOver && restartGame && !dialogIsPlaying) RestartGame();
         }
     }
 
@@ -125,7 +134,6 @@ public class GameController : MonoBehaviour
 
                 if (restartGame)
                 {
-                    RestartGame();
                     yield break;
                 }
 
@@ -153,7 +161,7 @@ public class GameController : MonoBehaviour
 
     private void RestartGame()
     {
-        m_canvasGroup.DOFade(0, 1f).OnComplete(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+        m_canvasGroup.DOFade(0, 1f).SetDelay(3).OnComplete(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
     private void DialogStarted()
@@ -203,9 +211,11 @@ public class GameController : MonoBehaviour
     }
     private void StatementPhase()
     {
-        if (trust >= 20 || trust <= 0)
+        ShowRandomHackingPhrase();
+        numberOfAnswers++;
+        if (trust >= 20 || trust <= 0 || numberOfAnswers > 7)
         {
-            CreateChatDialog(Speaker.CRIMINAL, ". . .");
+            CreateChatDialog(Speaker.CRIMINAL, "...");
             gameOver = true;
             StartCoroutine(StartGameOver());
         }
@@ -246,7 +256,7 @@ public class GameController : MonoBehaviour
 
     private void PlayerChoicePhase()
     {
-        if (!gameOver)
+        if (!restartGame && !gameOver)
         {
             playerChoicesController.UpdateOptionsText(currentStatement.negotiatorAnswers[0].dialogueOption,
             currentStatement.negotiatorAnswers[1].dialogueOption,
@@ -274,6 +284,10 @@ public class GameController : MonoBehaviour
         currentDialog = dialogLineController.CreateDialogue(speaker, text);
         typeWriterCoroutine = AnimateText();
         StartCoroutine(typeWriterCoroutine);
+    }
+
+    private void ShowRandomHackingPhrase(){
+        hackingController.IncreaseSlider(bombermanConversation.hackingSteps[UnityEngine.Random.Range(0, bombermanConversation.hackingSteps.Length)]);
     }
 
     public enum GamePhase

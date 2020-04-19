@@ -13,4 +13,7 @@ public class NokiaController : MonoBehaviour
     public void Shake(){
         transform.DOShakePosition(0.05f, 0.1f);
     }
+    public void MoveRight(){
+        transform.DOMoveX(4.5f, 1);
+    }
 }

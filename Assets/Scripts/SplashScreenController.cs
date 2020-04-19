@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class SplashScreenController : MonoBehaviour
 {
+    [SerializeField]
+    TextMeshProUGUI englishButton;
+    [SerializeField]
+    TextMeshProUGUI spanishButton;
     public Color32 highlightColor;
     float textSpeed;
     Canvas m_canvas;
@@ -76,5 +80,18 @@ public class SplashScreenController : MonoBehaviour
 
     public void OnPlayButtonClick(){
         GetComponent<CanvasGroup>().DOFade(0, 1).OnComplete(()=> {m_canvas.enabled = false; gameController.StartGame();});
+    }
+
+    public void OnSpanishButtonClick(){
+        gameController.path = "spanish";
+        englishButton.color = new Color32(255, 255, 255, 100);
+        spanishButton.color = highlightColor;
+
+    }
+
+    public void OnEnglishButtonClick(){
+        gameController.path = "english";
+        spanishButton.color = new Color32(255, 255, 255, 100);
+        englishButton.color = highlightColor;
     }
 }
