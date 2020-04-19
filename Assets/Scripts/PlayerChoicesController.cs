@@ -16,7 +16,7 @@ public class PlayerChoicesController : MonoBehaviour
 
         for (int i = 0; i < texts.Length; i++)
         {
-            texts[i].transform.parent.gameObject.SetActive(true);
+            texts[i].gameObject.SetActive(true);
             texts[i].SetText(options[i]);
         }
     }

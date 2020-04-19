@@ -11,6 +11,8 @@ public class CriminalConversation
 [Serializable]
 public class CriminalStatement
 {
+    public int minWrath;
+    public int minTrust;
     public string statement;
     public NegotiatorAnswer[] negotiatorAnswers;
 }

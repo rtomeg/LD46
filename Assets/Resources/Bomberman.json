@@ -1,9 +1,12 @@
 {
     "criminalStatements": [
         {
-            "statement": "O me dais lo que pido o hago explotar la bomba ahora mismo. ¡Que no me tiembla la mano, eh!",
+            "minWrath": 0,
+            "minTrust": 0,
+            "statement": "O me dais lo que pido o hago explotar la bomba ahora mismo. ¡Que estoy muy loco, eh!",
             "negotiatorAnswers": [
                 {
+                    
                     "dialogueOption": "Disculpa, que me están llamando por la otra línea, dame un minuto",
                     "wrathConsequence": 6,
                     "trustConsequence": -3,
@@ -19,9 +22,86 @@
                     "dialogueOption": "¿Te han dicho alguna vez que tienes una voz muy bonita?",
                     "wrathConsequence": -2,
                     "trustConsequence": 3,
-                    "criminalResponse": "La verdad es que siempre quise locutar vídeos de telemarketing, me siento muy identificado con sus problemas pero... ¡Oye! No me distraigas"
+                    "criminalResponse": "La verdad es que siempre quise locutar vídeos de teletienda, me siento muy identificado con sus problemas pero... ¡Oye! No me distraigas"
+                }
+            ]
+        },
+        {
+            "minWrath": 0,
+            "minTrust": 0,
+            "statement": "Jamás sabréis dónde estoy, así que ya me podéis ir dando lo que te pido",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "En realidad estamos localizando tu llamada. Si esperas 2 minutos más sabremos dónde estás",
+                    "wrathConsequence": 10,
+                    "trustConsequence": -10,
+                    "criminalResponse": "¡¿CÓMO?!"
+                },
+                {
+                    "dialogueOption": "Seguro que es un sitio precioso, con tu petición se nota que tienes buen gusto",
+                    "wrathConsequence": -2,
+                    "trustConsequence": 1,
+                    "criminalResponse": "Agradezco que te des cuenta, pero volvamos al tema..."
+                },
+                {
+                    "dialogueOption": "Pero dame alguna pista, venga. ¿Estás al norte o al sur?",
+                    "wrathConsequence": 2,
+                    "trustConsequence": -2,
+                    "criminalResponse": "¿Estás jugando conmigo? ¿Qué me han traído, al becario?"
+                }
+            ]
+        },
+        {
+            "minWrath": 7,
+            "minTrust": 0,
+            "statement": "Mira, me estás cabreando con tus tonterías. O nos ponemos serios ya o te cuelgo inmediatamente",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "La verdad es que me da exactamente igual, cuelga si quieres",
+                    "wrathConsequence": 3,
+                    "trustConsequence": -3,
+                    "criminalResponse": "..."
+                },
+                {
+                    "dialogueOption": "No, hombre, ahora que nos estábamos haciendo colegas, cuentame un poco más de ti",
+                    "wrathConsequence": -1,
+                    "trustConsequence": 1,
+                    "criminalResponse": "¿De mí...? Pues la verdad no hay mucho que contar. Soy típico acuario, ya sabes... ¡Oye, no me distraigas!"
+                },
+                {
+                    "dialogueOption": "Vale, pongámonos serios. Voy a ver qué puedo hacer",
+                    "wrathConsequence": -1,
+                    "trustConsequence": 3,
+                    "criminalResponse": "Joder, vale... pero venga ya"
+                }
+            ]
+        },
+        {
+            "minWrath": 0,
+            "minTrust": 7,
+            "statement": "Te agradezco que me digas tantas cosas bonitas, de verdad, pero estoy empezando a estar cansado. Si no me das ya lo que pido te voy a colgar",
+            "negotiatorAnswers": [
+                {
+                    "dialogueOption": "Parece que solo hablas conmigo para lo que te interesa. Así no funciona una relación",
+                    "wrathConsequence": 2,
+                    "trustConsequence": -3,
+                    "criminalResponse": "¡Pues claro, para eso estamos hablando! ¿Es la primera vez que haces tú trabajo o qué?"
+                },
+                {
+                    "dialogueOption": "Es que no puedo evitarlo, me encanta charlar contigo",
+                    "wrathConsequence": -3,
+                    "trustConsequence": 3,
+                    "criminalResponse": "Y a mí contigo, pero siento que no me estás tomando en serio... así que creo que es mejor que dejemos de hablar"
+                },
+                {
+                    "dialogueOption": "Es que creo que empiezo a sentir algo muy intenso por tí...",
+                    "wrathConsequence": -10,
+                    "trustConsequence": 10,
+                    "criminalResponse": "Entiendo lo que dices... a mí también me pasa. Pero esto no podría funcionar, así que creo que es mejor que dejemos de hablar"
                 }
             ]
         }
     ]
+    
+
 }

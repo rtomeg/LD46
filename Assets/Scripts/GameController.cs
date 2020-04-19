@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public int trust;
+    public int wrath;
+    [SerializeField]
+    Slider trustSlider;
+    [SerializeField]
+    Slider wrathSlider;
+
     public static float dialogueSpeed = 0.01f;
     private IEnumerator typeWriterCoroutine;
     private TextMeshProUGUI currentDialog;
@@ -25,16 +32,22 @@ public class GameController : MonoBehaviour
         TextAsset bomberman = Resources.Load<TextAsset>("Bomberman");
         CriminalConversation bombermanConversation = JsonUtility.FromJson<CriminalConversation>(bomberman.text);
         criminalStatements = bombermanConversation.criminalStatements;
-
         StatementPhase();
 
     }
 
     private CriminalStatement GetValidStatement()
     {
-        //TODO: Should remove from list (not repeating statements);
-        //TODO: if there is not valid statement, return random one
-        return criminalStatements[0];
+        CriminalStatement answer = criminalStatements.Find(x => x.minTrust <= trust && x.minWrath <= wrath);
+        if (answer != null)
+        {
+            criminalStatements.Remove(answer);
+        }
+        else
+        {
+            answer = criminalStatements[0];
+        }
+        return answer;
     }
 
     void Update()
@@ -126,8 +139,6 @@ public class GameController : MonoBehaviour
         currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, currentNegotatorAnswer.criminalResponse);
         typeWriterCoroutine = AnimateText();
         StartCoroutine(typeWriterCoroutine);
-
-        dialogLineController.CreateDialogue(Speaker.CRIMINAL, " ");
     }
 
     private void PlayerChoicePhase()
@@ -143,10 +154,22 @@ public class GameController : MonoBehaviour
         currentNegotatorAnswer = currentStatement.negotiatorAnswers[option];
 
         currentDialog = dialogLineController.CreateDialogue(Speaker.NEGOTIATOR, currentNegotatorAnswer.dialogueOption);
+        UpdateStats();
         typeWriterCoroutine = AnimateText();
         playerChoicesController.HideOptions();
         StartCoroutine(typeWriterCoroutine);
+
     }
+
+    private void UpdateStats()
+    {
+        trust = trust + currentNegotatorAnswer.trustConsequence;
+        wrath = wrath + currentNegotatorAnswer.wrathConsequence;
+
+        trustSlider.value = trust;
+        wrathSlider.value = wrath;
+    }
+
     public enum GamePhase
     {
         STATEMENT,
