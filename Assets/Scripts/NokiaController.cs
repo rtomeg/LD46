@@ -11,7 +11,6 @@ public class NokiaController : MonoBehaviour
         iddle = transform.DOLocalRotate(new Vector3(0, 0, -20), 3).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
     }
     public void Shake(){
-        //myShake.Restart();
-        transform.DOShakePosition(0.1f, 0.2f);
+        transform.DOShakePosition(0.05f, 0.1f);
     }
 }

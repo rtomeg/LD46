@@ -10,7 +10,7 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     AudioClip endCall;
     AudioSource sfx;
-    void Start(){
+    void Awake(){
         sfx = GetComponent<AudioSource>();
     }
     public void PlayBeepKey(){

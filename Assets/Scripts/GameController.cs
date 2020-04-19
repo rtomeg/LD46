@@ -10,14 +10,17 @@ public class GameController : MonoBehaviour
     public int trust;
     public int wrath;
     [SerializeField]
-    Slider trustSlider;
+    StatsController trustSlider;
     [SerializeField]
-    Slider wrathSlider;
+    StatsController wrathSlider;
 
     [SerializeField]
     AudioController audioController;
 
-    public static float dialogueSpeed = 0.01f;
+    [SerializeField]
+    SplashScreenController splashScreenController;
+
+    public static float dialogueSpeed = 0.05f;
     private IEnumerator typeWriterCoroutine;
     private TextMeshProUGUI currentDialog;
     private CriminalStatement currentStatement;
@@ -31,21 +34,31 @@ public class GameController : MonoBehaviour
     private PlayerChoicesController playerChoicesController;
 
     private bool gameOver;
+    [SerializeField]
+    private NokiaController nokiaController;
 
     void Start()
     {
+        if (splashScreenController == null){
+            splashScreenController = FindObjectOfType<SplashScreenController>();
+        }
+        if (nokiaController == null)
+        {
+            nokiaController = FindObjectOfType<NokiaController>();
+        }
         if (audioController == null)
         {
             audioController = FindObjectOfType<AudioController>();
         }
+    }
+
+    private void StartGame(){
         TextAsset bomberman = Resources.Load<TextAsset>("Bomberman");
         CriminalConversation bombermanConversation = JsonUtility.FromJson<CriminalConversation>(bomberman.text);
         criminalStatements = bombermanConversation.criminalStatements;
 
         StatementPhase();
-
     }
-
     private CriminalStatement GetValidStatement()
     {
 
@@ -64,8 +77,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Input.anyKeyDown)
-        {
-            StopDialogAnimation();
+        { if(dialogIsPlaying)  StopDialogAnimation();
         }
     }
 
@@ -86,7 +98,6 @@ public class GameController : MonoBehaviour
 
         int totalVisibleCharacters = currentDialog.textInfo.characterCount;
         int counter = 0;
-        float dialogueSpeed = GameController.dialogueSpeed;
 
         while (true)
         {
@@ -111,7 +122,11 @@ public class GameController : MonoBehaviour
             }
             else
             {
+                if (counter % 2 == 0)
+                {
+                nokiaController.Shake();
                 audioController.PlayBeepKey();
+                                }
                 yield return new WaitForSeconds(dialogueSpeed);
             }
         }
@@ -214,9 +229,11 @@ public class GameController : MonoBehaviour
         trust = trust + currentNegotatorAnswer.trustConsequence;
         wrath = wrath + currentNegotatorAnswer.wrathConsequence;
 
-        trustSlider.value = trust;
-        wrathSlider.value = wrath;
+        trustSlider.UpdateValue(trust);
+        wrathSlider.UpdateValue(wrath);
     }
+
+
 
     public enum GamePhase
     {
