@@ -8,10 +8,10 @@ public class NokiaController : MonoBehaviour
     Tween iddle;
 
     void Start(){
-        iddle = transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y, -10), 3).SetLoops(-1, LoopType.Yoyo);
+        iddle = transform.DOLocalRotate(new Vector3(0, 0, -20), 3).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
     }
     public void Shake(){
         //myShake.Restart();
-        transform.DOShakePosition(0.1f, 1);
+        transform.DOShakePosition(0.1f, 0.2f);
     }
 }

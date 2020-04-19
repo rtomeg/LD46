@@ -9,27 +9,46 @@ public class ChoiceText : MonoBehaviour
 
     public Color32 mainColor;
 
-    private TextMeshProUGUI m_textMeshProUGUI; 
+    private TextMeshProUGUI m_textMeshProUGUI;
     private GameController gameController;
 
     public int choiceOption;
 
-    void Start(){
-        if(gameController == null){
+    private bool isVisible = false;
+
+    void Start()
+    {
+        if (gameController == null)
+        {
             gameController = FindObjectOfType<GameController>();
         }
         m_textMeshProUGUI = GetComponent<TextMeshProUGUI>();
         m_textMeshProUGUI.color = mainColor;
     }
-    public void PointerEnter(){
+    public void PointerEnter()
+    {
         m_textMeshProUGUI.color = highlightColor;
     }
 
-    public void PointerExit(){
+    public void PointerExit()
+    {
         m_textMeshProUGUI.color = mainColor;
     }
 
-    public void Clicked(){
-        gameController.OnPlayerChoice(choiceOption);
+    public void Clicked()
+    {
+        if (isVisible) gameController.OnPlayerChoice(choiceOption);
+    }
+
+    public void HideText()
+    {
+        isVisible = false;
+        m_textMeshProUGUI.SetText("");
+    }
+
+    public void ShowText(string text)
+    {
+        isVisible = true;
+        m_textMeshProUGUI.SetText(text);
     }
 }

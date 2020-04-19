@@ -5,27 +5,26 @@ using TMPro;
 
 public class PlayerChoicesController : MonoBehaviour
 {
-    private TextMeshProUGUI[] texts;
+    private ChoiceText[] choices;
     private void Start()
     {
-        texts = GetComponentsInChildren<TextMeshProUGUI>(true);
+        choices = GetComponentsInChildren<ChoiceText>();
     }
 
     public void UpdateOptionsText(params string[] options)
     {
 
-        for (int i = 0; i < texts.Length; i++)
+        for (int i = 0; i < choices.Length; i++)
         {
-            texts[i].gameObject.SetActive(true);
-            texts[i].SetText(options[i]);
+            choices[i].ShowText(options[i]);
         }
     }
 
     public void HideOptions()
     {
-        foreach (Transform child in transform)
+        foreach (ChoiceText choice in choices)
         {
-            child.gameObject.SetActive(false);
+            choice.HideText();
         }
     }
 }

@@ -14,6 +14,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     Slider wrathSlider;
 
+    [SerializeField]
+    AudioController audioController;
+
     public static float dialogueSpeed = 0.01f;
     private IEnumerator typeWriterCoroutine;
     private TextMeshProUGUI currentDialog;
@@ -27,17 +30,25 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private PlayerChoicesController playerChoicesController;
 
+    private bool gameOver;
+
     void Start()
     {
+        if (audioController == null)
+        {
+            audioController = FindObjectOfType<AudioController>();
+        }
         TextAsset bomberman = Resources.Load<TextAsset>("Bomberman");
         CriminalConversation bombermanConversation = JsonUtility.FromJson<CriminalConversation>(bomberman.text);
         criminalStatements = bombermanConversation.criminalStatements;
+
         StatementPhase();
 
     }
 
     private CriminalStatement GetValidStatement()
     {
+
         CriminalStatement answer = criminalStatements.Find(x => x.minTrust <= trust && x.minWrath <= wrath);
         if (answer != null)
         {
@@ -83,13 +94,29 @@ public class GameController : MonoBehaviour
             currentDialog.maxVisibleCharacters = visibleCount;
             if (visibleCount >= totalVisibleCharacters)
             {
+                if (gameOver)
+                {
+                    yield break;
+                }
+
                 DialogFinished();
                 yield break;
             }
+
             counter += 1;
-            yield return new WaitForSeconds(dialogueSpeed);
+            if (gameOver)
+            {
+                audioController.PlayEndCallSound();
+                yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                audioController.PlayBeepKey();
+                yield return new WaitForSeconds(dialogueSpeed);
+            }
         }
     }
+
 
     private void DialogStarted()
     {
@@ -100,6 +127,7 @@ public class GameController : MonoBehaviour
     {
         dialogIsPlaying = false;
         StartCoroutine(NextStep());
+
     }
 
     private IEnumerator NextStep()
@@ -129,11 +157,28 @@ public class GameController : MonoBehaviour
     }
     private void StatementPhase()
     {
-        currentStatement = GetValidStatement();
-        currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, currentStatement.statement);
-        typeWriterCoroutine = AnimateText();
-        StartCoroutine(typeWriterCoroutine);
+        if (trust >= 10 || wrath >= 10)
+        {
+            currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, ". . .");
+            typeWriterCoroutine = AnimateText();
+            StartCoroutine(typeWriterCoroutine);
+            gameOver = true;
+            StartGameOver();
+        }
+        else
+        {
+            currentStatement = GetValidStatement();
+            currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, currentStatement.statement);
+            typeWriterCoroutine = AnimateText();
+            StartCoroutine(typeWriterCoroutine);
+        }
     }
+
+    private void StartGameOver()
+    {
+        Debug.Log("GAME OVER");
+    }
+
     private void CriminalAnswerPhase()
     {
         currentDialog = dialogLineController.CreateDialogue(Speaker.CRIMINAL, currentNegotatorAnswer.criminalResponse);
@@ -143,10 +188,13 @@ public class GameController : MonoBehaviour
 
     private void PlayerChoicePhase()
     {
-        playerChoicesController.UpdateOptionsText(currentStatement.negotiatorAnswers[0].dialogueOption,
-        currentStatement.negotiatorAnswers[1].dialogueOption,
-        currentStatement.negotiatorAnswers[2].dialogueOption
-        );
+        if (!gameOver)
+        {
+            playerChoicesController.UpdateOptionsText(currentStatement.negotiatorAnswers[0].dialogueOption,
+            currentStatement.negotiatorAnswers[1].dialogueOption,
+            currentStatement.negotiatorAnswers[2].dialogueOption
+            );
+        }
     }
 
     public void OnPlayerChoice(int option)
