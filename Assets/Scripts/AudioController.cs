@@ -63,10 +63,11 @@ public class AudioController : MonoBehaviour
 
     IEnumerator MusicCorroutine()
     {
+        Debug.Log("ChangingMusic");
         music.clip = musicList[Random.Range(0, musicList.Count)];
         music.Play();
         yield return new WaitForSeconds(30);
-        MusicCorroutine();
+        StartCoroutine(MusicCorroutine());
     }
 
     public void PlayBeepKey()
