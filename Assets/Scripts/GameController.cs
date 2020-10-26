@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
         if (Input.anyKeyDown)
         {
             if (dialogIsPlaying) StopDialogAnimation();
-            if(!gameOver && restartGame && !dialogIsPlaying) RestartGame();
+            if (!gameOver && restartGame && !dialogIsPlaying) RestartGame();
         }
     }
 
@@ -144,6 +144,10 @@ public class GameController : MonoBehaviour
             counter += 1;
             if (gameOver)
             {
+                if (audioController == null)
+                {
+                    audioController = FindObjectOfType<AudioController>();
+                }
                 audioController.PlayEndCallSound();
                 yield return new WaitForSeconds(0.5f);
             }
@@ -152,6 +156,10 @@ public class GameController : MonoBehaviour
                 if (counter % 2 == 0)
                 {
                     nokiaController.Shake();
+                    if (audioController == null)
+                    {
+                        audioController = FindObjectOfType<AudioController>();
+                    }
                     audioController.PlayBeepKey();
                 }
                 yield return new WaitForSeconds(dialogueSpeed);
@@ -228,20 +236,19 @@ public class GameController : MonoBehaviour
 
     private IEnumerator StartGameOver()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         gameOver = false;
-
-        if (trust >= 20 || trust <= 0)
-        {
-            restartGame = true;
-            gameOver = false;
-            CreateChatDialog(Speaker.NARRATOR, bombermanConversation.failEnding);
-        }
-        else
+        if (numberOfAnswers > 7)
         {
             gameOver = false;
             restartGame = true;
             CreateChatDialog(Speaker.NARRATOR, bombermanConversation.successEnding);
+        }
+        else
+        {
+            restartGame = true;
+            gameOver = false;
+            CreateChatDialog(Speaker.NARRATOR, bombermanConversation.failEnding);
         }
     }
 
@@ -286,7 +293,8 @@ public class GameController : MonoBehaviour
         StartCoroutine(typeWriterCoroutine);
     }
 
-    private void ShowRandomHackingPhrase(){
+    private void ShowRandomHackingPhrase()
+    {
         hackingController.IncreaseSlider(bombermanConversation.hackingSteps[UnityEngine.Random.Range(0, bombermanConversation.hackingSteps.Length)]);
     }
 
